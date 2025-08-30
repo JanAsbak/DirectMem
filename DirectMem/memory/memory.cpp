@@ -2,7 +2,8 @@
 
 Memory::Memory(ULONG processId)
 {
-	
+	targetProcess = GetEprocess(processId);
+	cr3 = GetCr3(targetProcess);
 }
 
 Memory::~Memory()
@@ -34,7 +35,7 @@ PEPROCESS GetEprocess(ULONG processId)
 PHYSICAL_ADDRESS Memory::GetCr3(PEPROCESS process)
 {
 	PHYSICAL_ADDRESS cr3 = { 0 };
-	cr3.QuadPart = *(ULONG_PTR*)((UCHAR)process + 0x28); // x64 DirectoryTableBase offset
+	cr3.QuadPart = *(ULONG_PTR*)((UCHAR*)process + 0x28); // x64 DirectoryTableBase offset
 
 	return cr3;
 }

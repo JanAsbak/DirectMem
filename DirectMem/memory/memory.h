@@ -1,11 +1,13 @@
 #pragma once
 #include <ntifs.h>
+#include <wdm.h>
 #include "structs.h"
 
 class Memory
 {
 private:
 	PEPROCESS targetProcess;
+	PHYSICAL_ADDRESS cr3 = { 0 };
 
 
 public:
