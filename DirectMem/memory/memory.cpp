@@ -43,5 +43,18 @@ PHYSICAL_ADDRESS Memory::GetCr3(PEPROCESS process)
 	return cr3;
 }
 
+UINT64 Memory::read(UINT64 va)
+{
+	UINT64 pml4_index	= (va >> 39) & 0x1FF;
+	UINT64 pdpt_index	= (va >> 30) & 0x1FF;
+	UINT64 pd_index		= (va >> 21) & 0x1FF;
+	UINT64 pt_index		= (va >> 12) & 0x1FF;
+	UINT64 offset		= va & 0xFFF;
+
+	UINT64 pml4_phys = (cr3.QuadPart & ~0xFFFULL);
+	
+
+}
+
 
 

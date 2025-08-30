@@ -17,6 +17,6 @@ public:
 	PEPROCESS GetEprocess(ULONG processId);
 	PHYSICAL_ADDRESS GetCr3(PEPROCESS process);
 
-	NTSTATUS read();
+	UINT64 read(UINT64 va);
 	NTSTATUS write();
 };
