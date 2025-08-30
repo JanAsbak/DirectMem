@@ -11,15 +11,15 @@ Memory::~Memory()
 
 }
 
-PEPROCESS GetEprocess(ULONG processId)
+PEPROCESS Memory::GetEprocess(ULONG processId)
 {
-	PEPROCESS current = (PEPROCESS)PsInitialSystemProcess;
+	MYPEPROCESS current = (MYPEPROCESS)PsInitialSystemProcess;
 	PLIST_ENTRY listHead = &current->ActiveProcessLinks;
 	PLIST_ENTRY listNext = listHead->Flink;
 
 	while (listNext != listHead)
 	{
-		PEPROCESS entry = CONTAINING_RECORD(listNext, EPROCESS, ActiveProcessLinks);
+		MYPEPROCESS entry = CONTAINING_RECORD(listNext, MYEPROCESS, ActiveProcessLinks);
 
 		if ((ULONG_PTR)entry->UniqueProcessId == processId)
 		{
@@ -34,9 +34,14 @@ PEPROCESS GetEprocess(ULONG processId)
 
 PHYSICAL_ADDRESS Memory::GetCr3(PEPROCESS process)
 {
+	if (!process)
+		return { 0 };
+
 	PHYSICAL_ADDRESS cr3 = { 0 };
 	cr3.QuadPart = *(ULONG_PTR*)((UCHAR*)process + 0x28); // x64 DirectoryTableBase offset
 
 	return cr3;
 }
+
+
 

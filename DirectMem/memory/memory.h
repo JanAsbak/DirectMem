@@ -11,10 +11,12 @@ private:
 
 
 public:
-	Memory(ULONG processId); // Constructor
-	~Memory(); // Destructor
+	Memory(ULONG processId);	// Constructor
+	~Memory();					// Destructor
+
 	PEPROCESS GetEprocess(ULONG processId);
 	PHYSICAL_ADDRESS GetCr3(PEPROCESS process);
-	void read();
-	void write();
+
+	NTSTATUS read();
+	NTSTATUS write();
 };
