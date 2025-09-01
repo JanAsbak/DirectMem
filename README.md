@@ -1,13 +1,12 @@
 # DirectMem
-# VA → PA Translation & Process Memory Reader (Kernel Driver)
+# VA → PA manual Translation
 
-A Windows kernel driver demonstrating **manual virtual-to-physical address translation** and reading memory from other processes using that translation.
+A Windows kernel driver demonstrating **manual virtual-to-physical address translation**.
 
 ---
 
 ## Features
 - Manual VA → PA translation via page table walk
-- Read process memory using custom VA → PA mapping
 - Minimal reliance on Windows APIs
 
 ---
